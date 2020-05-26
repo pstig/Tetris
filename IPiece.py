@@ -20,4 +20,4 @@ class IPiece(Piece):
         )
 
     def get_character_name(self):
-        return 'I'
+        return "I"

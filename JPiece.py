@@ -1,11 +1,13 @@
 from Piece import Piece
 
+
 class JPiece(Piece):
     def __init__(self):
-        self._positions = [[(0,0),(0,1),(0,-1),(-1,-1)],
-                          [(0,0),(1,0),(-1,0),(-1,1)],
-                          [(0,0),(0,1),(0,-1),(1,1)],
-                          [(0,0),(1,0),(-1,0),(1,-1)],
+        self._positions = [
+            [(0, 0), (0, 1), (0, -1), (-1, -1)],
+            [(0, 0), (1, 0), (-1, 0), (-1, 1)],
+            [(0, 0), (0, 1), (0, -1), (1, 1)],
+            [(0, 0), (1, 0), (-1, 0), (1, -1)],
         ]
         self._position_id = 0
         super().__init__()
@@ -20,4 +22,4 @@ class JPiece(Piece):
         return self._positions[self._position_id]
 
     def get_character_name(self):
-        return 'J'
+        return "J"

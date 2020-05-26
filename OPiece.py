@@ -15,4 +15,4 @@ class OPiece(Piece):
         return [(0, 0), (0, 1), (1, 1), (1, 0)]
 
     def get_character_name(self):
-        return 'O'
+        return "O"

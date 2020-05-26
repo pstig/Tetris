@@ -27,11 +27,10 @@ class Board:
         pygame.Color("red"),
     ]
 
-    def __init__(self):
-        self.col_count = 10
-        self.row_count = 24
-        self.active_piece = JPiece()
-        self.active_piece_location = [6, 6]
+    def __init__(self, col_count, row_count):
+        self.col_count = col_count
+        self.row_count = row_count
+
         # Array of rows, top to bottom
         self._tiles = [
             [0 for _ in range(self.col_count)] for _ in range(self.row_count)
@@ -45,50 +44,23 @@ class Board:
             surface, color, (col * rectW, row * rectH, rectW, rectH),
         )
 
-    def draw(self, surface):
+    def draw(self, surface, piece, piece_location):
         surface.fill((255, 255, 255))
         for j in range(self.col_count):
             for i in range(self.row_count):
                 if self._tiles[i][j] != 0:
-                    self.fill_tile(surface, j, i, Board.colors[self._tiles[i][j]])
-        
-        piece_offsets = self.active_piece.get_locations()
-        piece_color_idx = Board.piece_to_color_idx[
-            self.active_piece.get_character_name()
-        ]
+                    self.fill_tile(surface, i, j, Board.colors[self._tiles[i][j]])
+
+        piece_offsets = piece.get_locations()
+        piece_color_idx = Board.piece_to_color_idx[piece.get_character_name()]
         for offset in piece_offsets:
             self.fill_tile(
                 surface,
-                self.active_piece_location[0] + offset[0],
-                self.active_piece_location[1] + offset[1],
+                piece_location[0] + offset[0],
+                piece_location[1] + offset[1],
                 Board.colors[piece_color_idx],
             )
 
-    def check_piece_legal(self):
-        piece_offsets = self.active_piece.get_locations()
-        for offset in piece_offsets:
-            filled_loc_row = self.active_piece_location[0] + offset[0]
-            filled_loc_col = self.active_piece_location[1] + offset[1]
-            if not 0 <= filled_loc_col < self.col_count:
-
-                return False
-            if not 0 <= filled_loc_row < self.row_count:
-                return False
-            if self._tiles[filled_loc_row][filled_loc_col]:
-                return False
-        return True
-
-    def move_piece(self, delta, down_tick=False):
-        past_location = self.active_piece_location[:]
-        self.active_piece_location[0] += delta[0]
-        self.active_piece_location[1] += delta[1]
-        if not self.check_piece_legal():
-            if down_tick:
-                self.active_piece_location = [6,6]
-            else:
-                self.active_piece_location = past_location
-            
-            
     def clear_rows(self):
         remove_count = 0
         for row in self._tiles:
@@ -98,3 +70,12 @@ class Board:
         for _ in range(remove_count):
             self._tiles.pop()
             self._tiles.insert(0, [0 for _ in range(self.col_count)])
+
+    def add_piece_to_tiles(self, piece, piece_location):
+        piece_offsets = piece.get_locations()
+        piece_color_idx = Board.piece_to_color_idx[piece.get_character_name()]
+
+        for offset in piece_offsets:
+            self._tiles[piece_location[0] + offset[0]][
+                piece_location[1] + offset[1]
+            ] = piece_color_idx
