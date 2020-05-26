@@ -110,7 +110,6 @@ class Game:
         if not self.check_piece_legal():
             if down_tick:
                 self._board.add_piece_to_tiles(self.active_piece, past_location)
-                self.active_piece_location = [6, 6]
                 self.set_new_piece()
                 self._board.clear_rows()
             else:

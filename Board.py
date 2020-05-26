@@ -69,12 +69,15 @@ class Board:
 
     def clear_rows(self):
         remove_count = 0
-        for row in self._tiles:
-            if all(row):
+        remove_indices = []
+        for i in range(self.row_count):
+            if all(self._tiles[i]):
                 remove_count += 1
-
+                remove_indices.append(i)
+                
+        for ind in reversed(remove_indices):
+            self._tiles.pop(ind)
         for _ in range(remove_count):
-            self._tiles.pop()
             self._tiles.insert(0, [0 for _ in range(self.col_count)])
         return remove_count
 
