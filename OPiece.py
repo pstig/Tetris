@@ -16,3 +16,6 @@ class OPiece(Piece):
 
     def get_character_name(self):
         return "O"
+    
+    def get_spawn_offset(self):
+        return [0,1]

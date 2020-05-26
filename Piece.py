@@ -10,3 +10,6 @@ class Piece:
 
     def get_character_name(self):
         raise NotImplementedError("base class not implemented")
+
+    def get_spawn_offset(self):
+        raise NotImplementedError("base class not implemented")

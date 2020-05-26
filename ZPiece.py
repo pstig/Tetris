@@ -21,3 +21,6 @@ class ZPiece(Piece):
 
     def get_character_name(self):
         return "Z"
+
+    def get_spawn_offset(self):
+        return [0,1]

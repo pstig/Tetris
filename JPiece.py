@@ -23,3 +23,6 @@ class JPiece(Piece):
 
     def get_character_name(self):
         return "J"
+
+    def get_spawn_offset(self):
+        return [1,1]

@@ -56,10 +56,14 @@ class Board:
         piece_offsets = piece.get_locations()
         piece_color_idx = Board.piece_to_color_idx[piece.get_character_name()]
         for offset in piece_offsets:
+            row = piece_location[0] + offset[0]
+            col = piece_location[1] + offset[1]
+            if row < 0:
+                continue
             self.fill_tile(
                 surface,
-                piece_location[0] + offset[0],
-                piece_location[1] + offset[1],
+                row,
+                col,
                 Board.colors[piece_color_idx],
             )
 

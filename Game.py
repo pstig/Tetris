@@ -27,8 +27,9 @@ class Game:
         self.row_count = 24
         self._board = Board(self.col_count, self.row_count)
         self._tick_count = 0
-        self.active_piece = JPiece()
-        self.active_piece_location = [6, 6]
+        self.active_piece = None
+        self.active_piece_location = None
+        self.set_new_piece()
         level = 0
 
     def draw(self, surface):
@@ -48,6 +49,10 @@ class Game:
 
     def set_new_piece(self):
         self.active_piece = random.choice(Game.choices)()
+        offset = self.active_piece.get_spawn_offset()
+        self.active_piece_location = [-2,3]
+        self.active_piece_location[0] += offset[0]
+        self.active_piece_location[1] += offset[1]
 
     def on_event(self, event):
         if event.type == pygame.KEYDOWN:
@@ -90,7 +95,9 @@ class Game:
             filled_loc_col = self.active_piece_location[1] + offset[1]
             if not 0 <= filled_loc_col < self.col_count:
                 return False
-            if not 0 <= filled_loc_row < self.row_count:
+            if filled_loc_row < 0:
+                continue
+            if not filled_loc_row < self.row_count:
                 return False
             if self._board._tiles[filled_loc_row][filled_loc_col]:
                 return False
