@@ -4,13 +4,24 @@ import random
 
 
 class Board:
+    colors = [
+        pygame.Color("white"),
+        pygame.Color("cyan"),
+        pygame.Color("darkblue"),
+        pygame.Color("orange"),
+        pygame.Color("yellow"),
+        pygame.Color("lightgreen"),
+        pygame.Color("purple"),
+        pygame.Color("red"),
+    ]
+
     def __init__(self):
         self.col_count = 10
         self.row_count = 24
         self.active_piece = IPiece()
         # Array of rows, top to bottom
         self._tiles = [
-            [random.randint(0, 1) for _ in range(self.col_count)]
+            [random.randint(0, 7) for _ in range(self.col_count)]
             for _ in range(self.row_count)
         ]
 
@@ -20,9 +31,11 @@ class Board:
         rectH = surface.get_height() / self.row_count
         for j in range(self.col_count):
             for i in range(self.row_count):
-                if self._tiles[i][j] == 1:
+                if self._tiles[i][j] != 0:
                     pygame.draw.rect(
-                        surface, (0, 0, 255), (j * rectW, i * rectH, rectW, rectH)
+                        surface,
+                        Board.colors[self._tiles[i][j]],
+                        (j * rectW, i * rectH, rectW, rectH),
                     )
 
     def clear_rows(self):
