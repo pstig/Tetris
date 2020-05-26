@@ -46,6 +46,10 @@ class Game:
                 self.active_piece.rotate_left()
                 if not self.check_piece_legal():
                     self.active_piece.rotate_right()
+            elif event.key == pygame.K_LEFT:
+                self.move_piece((0, -1), down_tick=False)
+            elif event.key == pygame.K_RIGHT:
+                self.move_piece((0, 1), down_tick=False)
 
     def check_piece_legal(self):
         piece_offsets = self.active_piece.get_locations()
@@ -53,7 +57,6 @@ class Game:
             filled_loc_row = self.active_piece_location[0] + offset[0]
             filled_loc_col = self.active_piece_location[1] + offset[1]
             if not 0 <= filled_loc_col < self.col_count:
-
                 return False
             if not 0 <= filled_loc_row < self.row_count:
                 return False
@@ -70,5 +73,6 @@ class Game:
                 self._board.add_piece_to_tiles(self.active_piece, past_location)
                 self.active_piece_location = [6, 6]
                 self.set_new_piece()
+                self._board.clear_rows()
             else:
                 self.active_piece_location = past_location
