@@ -1,11 +1,12 @@
 import pygame
 from pygame.locals import *
 from Board import Board
+from Game import Game
 
 
 class App:
     def __init__(self):
-        self._board = Board()
+        self._game = Game()
         self._running = True
         self._display_surf = None
         self.size = self.width, self.height = 300, 720  # 30 * col/row
@@ -25,13 +26,14 @@ class App:
         pass
 
     def on_render(self):
-        self._board.draw(self._display_surf)
+        self._game.draw(self._display_surf)
         pygame.display.update()
 
     def on_cleanup(self):
         pygame.quit()
 
     def on_execute(self):
+        clock = pygame.time.Clock()
         if self.on_init() == False:
             self._running = False
 
@@ -40,6 +42,7 @@ class App:
                 self.on_event(event)
             self.on_loop()
             self.on_render()
+            clock.tick(60)
         self.on_cleanup()
 
 
