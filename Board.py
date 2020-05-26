@@ -4,13 +4,14 @@ import random
 
 
 class Board:
-    piece_to_color_idx = {"I": 1,
-                          "J": 2,
-                          "L": 3,
-                          "O": 4,
-                          "S": 5,
-                          "T": 6,
-                          "Z": 7,
+    piece_to_color_idx = {
+        "I": 1,
+        "J": 2,
+        "L": 3,
+        "O": 4,
+        "S": 5,
+        "T": 6,
+        "Z": 7,
     }
     colors = [
         pygame.Color("white"),
@@ -48,7 +49,9 @@ class Board:
                 if self._tiles[i][j] != 0:
                     self.fill_tile(surface, j, i, Board.colors[self._tiles[i][j]])
         piece_offsets = self.active_piece.get_locations()
-        piece_color_idx = Board.piece_to_color_idx[self.active_piece.get_character_name()]
+        piece_color_idx = Board.piece_to_color_idx[
+            self.active_piece.get_character_name()
+        ]
         for offset in piece_offsets:
             self.fill_tile(
                 surface,
