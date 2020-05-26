@@ -72,6 +72,7 @@ class Board:
         for _ in range(remove_count):
             self._tiles.pop()
             self._tiles.insert(0, [0 for _ in range(self.col_count)])
+        return remove_count
 
     def add_piece_to_tiles(self, piece, piece_location):
         piece_offsets = piece.get_locations()
