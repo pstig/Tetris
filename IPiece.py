@@ -14,10 +14,10 @@ class IPiece(Piece):
 
     def get_locations(self):
         return (
-            [(0, -1), (0, 0), (0, 1), (0, 2)]
+            [(0, -2), (0, -1), (0, 0), (0, 1)]
             if self._is_flat
-            else [(-1, 0), (0, 0), (1, 0), (2, 0)]
+            else [(-2, 0), (-1, 0), (0, 0), (1, 0)]
         )
 
     def get_character_name(self):
-        return "I"
+        return 'I'
