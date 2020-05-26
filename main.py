@@ -8,7 +8,7 @@ class App:
         self._board = Board()
         self._running = True
         self._display_surf = None
-        self.size = self.width, self.height = 640, 400
+        self.size = self.width, self.height = 300, 720  # 30 * col/row
 
     def on_init(self):
         pygame.init()
