@@ -1,3 +1,4 @@
+from IPiece import IPiece
 import pygame
 import random
 
@@ -6,7 +7,8 @@ class Board:
     def __init__(self):
         self.col_count = 10
         self.row_count = 24
-        # array of rows, top to bottom
+        self.active_piece = IPiece()
+        # Array of rows, top to bottom
         self._tiles = [
             [random.randint(0, 1) for _ in range(self.col_count)]
             for _ in range(self.row_count)
@@ -26,10 +28,9 @@ class Board:
     def clear_rows(self):
         remove_count = 0
         for row in self._tiles:
-            if(all(row)):
+            if all(row):
                 remove_count += 1
 
         for _ in range(remove_count):
             self._tiles.pop()
             self._tiles.insert(0, [0 for _ in range(self.col_count)])
-            

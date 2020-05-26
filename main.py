@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from board import Board
+from Board import Board
 
 
 class App:
