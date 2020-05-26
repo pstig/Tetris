@@ -62,22 +62,27 @@ class Board:
                 self.active_piece_location[1] + offset[1],
                 Board.colors[piece_color_idx],
             )
+
     def check_piece_legal(self):
         piece_offsets = self.active_piece.get_locations()
         for offset in piece_offsets:
             filled_loc_row = self.active_piece_location[0] + offset[0]
             filled_loc_col = self.active_piece_location[1] + offset[1]
+            if not 0 <= filled_loc_col < self.col_count:
+
+                return False
+            if not 0 <= filled_loc_row < self.row_count:
+                return False
             if self._tiles[filled_loc_row][filled_loc_col]:
                 return False
         return True
 
     def move_piece(self, delta):
-        past_location = self.active_piece_location
+        past_location = self.active_piece_location[:]
         self.active_piece_location[0] += delta[0]
         self.active_piece_location[1] += delta[1]
         if not self.check_piece_legal():
             self.active_piece_location = past_location
-
 
     def clear_rows(self):
         remove_count = 0

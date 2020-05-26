@@ -21,16 +21,13 @@ class App:
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                self._board.active_piece.rotate_right()
-            elif event.key == pygame.K_z:
-                self._board.active_piece.rotate_left()
+        self._game.on_event(event)
 
     def on_loop(self):
         pass
 
     def on_render(self):
+        self._game.game_tick()
         self._game.draw(self._display_surf)
         pygame.display.update()
 
