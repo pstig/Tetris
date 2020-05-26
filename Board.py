@@ -1,4 +1,7 @@
 from IPiece import IPiece
+from JPiece import JPiece
+from LPiece import LPiece
+from OPiece import OPiece
 import pygame
 import random
 
@@ -27,7 +30,7 @@ class Board:
     def __init__(self):
         self.col_count = 10
         self.row_count = 24
-        self.active_piece = IPiece()
+        self.active_piece = JPiece()
         self.active_piece_location = [6, 6]
         # Array of rows, top to bottom
         self._tiles = [
