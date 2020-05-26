@@ -51,6 +51,7 @@ class Board:
             for i in range(self.row_count):
                 if self._tiles[i][j] != 0:
                     self.fill_tile(surface, j, i, Board.colors[self._tiles[i][j]])
+        
         piece_offsets = self.active_piece.get_locations()
         piece_color_idx = Board.piece_to_color_idx[
             self.active_piece.get_character_name()
@@ -77,12 +78,16 @@ class Board:
                 return False
         return True
 
-    def move_piece(self, delta):
+    def move_piece(self, delta, down_tick=False):
         past_location = self.active_piece_location[:]
         self.active_piece_location[0] += delta[0]
         self.active_piece_location[1] += delta[1]
         if not self.check_piece_legal():
-            self.active_piece_location = past_location
+            if down_tick:
+                self.active_piece_location = [6,6]
+            else:
+                self.active_piece_location = past_location
+            
             
     def clear_rows(self):
         remove_count = 0

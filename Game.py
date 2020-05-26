@@ -29,7 +29,7 @@ class Game:
     def game_tick(self):
         self._tick_count += 1
         if (self._tick_count % 10 == 0):
-            self._board.move_piece((1,0))
+            self._board.move_piece((1,0), down_tick=True)
 
     def new_piece(self):
         self._board.active_piece = random.choice(choices)()
