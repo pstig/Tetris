@@ -1,9 +1,11 @@
 import pygame
 from pygame.locals import *
+from board import Board
 
 
 class App:
     def __init__(self):
+        self._board = Board()
         self._running = True
         self._display_surf = None
         self.size = self.width, self.height = 640, 400
@@ -23,7 +25,8 @@ class App:
         pass
 
     def on_render(self):
-        pass
+        self._board.draw(self._display_surf)
+        pygame.display.update()
 
     def on_cleanup(self):
         pygame.quit()
