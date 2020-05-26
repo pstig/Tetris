@@ -42,10 +42,5 @@ class Game:
                     self._board.active_piece.rotate_left()
             elif event.key == pygame.K_z:
                 self._board.active_piece.rotate_left()
-<<<<<<< HEAD
-
-
-=======
                 if not self._board.check_piece_legal():
                     self._board.active_piece.rotate_right()
->>>>>>> 4094441bf03221e3b742e2891c4b3576ddba0ebe
