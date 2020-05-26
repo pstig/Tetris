@@ -51,7 +51,7 @@ class Game:
     def set_new_piece(self):
         self.active_piece = random.choice(Game.choices)()
         offset = self.active_piece.get_spawn_offset()
-        self.active_piece_location = [-2,3]
+        self.active_piece_location = [-2, 3]
         self.active_piece_location[0] += offset[0]
         self.active_piece_location[1] += offset[1]
 

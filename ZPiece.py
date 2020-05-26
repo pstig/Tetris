@@ -23,4 +23,4 @@ class ZPiece(Piece):
         return "Z"
 
     def get_spawn_offset(self):
-        return [0,1]
+        return [0, 1]

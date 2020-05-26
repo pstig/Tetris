@@ -25,4 +25,4 @@ class TPiece(Piece):
         return "T"
 
     def get_spawn_offset(self):
-        return [1,1]
+        return [1, 1]

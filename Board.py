@@ -61,10 +61,7 @@ class Board:
             if row < 0:
                 continue
             self.fill_tile(
-                surface,
-                row,
-                col,
-                Board.colors[piece_color_idx],
+                surface, row, col, Board.colors[piece_color_idx],
             )
 
     def clear_rows(self):
@@ -74,7 +71,7 @@ class Board:
             if all(self._tiles[i]):
                 remove_count += 1
                 remove_indices.append(i)
-                
+
         for ind in reversed(remove_indices):
             self._tiles.pop(ind)
         for _ in range(remove_count):

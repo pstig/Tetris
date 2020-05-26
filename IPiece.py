@@ -23,4 +23,4 @@ class IPiece(Piece):
         return "I"
 
     def get_spawn_offset(self):
-        return [1,2]
+        return [1, 2]
