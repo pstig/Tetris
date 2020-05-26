@@ -1,6 +1,9 @@
 import pygame
 from Board import Board
-
+from IPiece import IPiece
+from JPiece import JPiece
+from LPiece import LPiece
+from OPiece import OPiece
 
 class Game:
 
@@ -9,7 +12,12 @@ class Game:
     #lines complete
     #stats
     #events
-
+    choices = [
+        IPiece,
+        JPiece,
+        LPiece,
+        OPiece
+    ]
     def __init__(self):
         self._board = Board()
         self._tick_count = 0
@@ -29,3 +37,6 @@ class Game:
                 self._board.active_piece.rotate_right()
             elif event.key == pygame.K_z:
                 self._board.active_piece.rotate_left()
+                
+    def new_piece(self):
+        self._board.active_piece = random.choice(choices)()
