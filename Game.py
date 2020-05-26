@@ -27,5 +27,9 @@ class Game:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 self._board.active_piece.rotate_right()
+                if not self._board.check_piece_legal():
+                    self._board.active_piece.rotate_left()
             elif event.key == pygame.K_z:
                 self._board.active_piece.rotate_left()
+                if not self._board.check_piece_legal():
+                    self._board.active_piece.rotate_right()

@@ -83,7 +83,7 @@ class Board:
         self.active_piece_location[1] += delta[1]
         if not self.check_piece_legal():
             self.active_piece_location = past_location
-
+            
     def clear_rows(self):
         remove_count = 0
         for row in self._tiles:
