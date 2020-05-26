@@ -50,6 +50,8 @@ class Game:
                 self.move_piece((0, -1), down_tick=False)
             elif event.key == pygame.K_RIGHT:
                 self.move_piece((0, 1), down_tick=False)
+            elif event.key == pygame.K_SPACE:
+                self.hard_drop()
 
     def check_piece_legal(self):
         piece_offsets = self.active_piece.get_locations()
@@ -76,3 +78,9 @@ class Game:
                 self._board.clear_rows()
             else:
                 self.active_piece_location = past_location
+            return False
+        return True
+
+    def hard_drop(self):
+        while(self.move_piece((1,0), down_tick=True)):
+            pass
