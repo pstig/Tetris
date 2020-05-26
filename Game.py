@@ -2,6 +2,7 @@ import pygame
 import random
 from Board import Board
 from IPiece import IPiece
+from TPiece import TPiece
 from JPiece import JPiece
 from LPiece import LPiece
 from OPiece import OPiece
@@ -16,7 +17,7 @@ class Game:
     # lines complete
     # stats
     # events
-    choices = [IPiece, JPiece, LPiece, OPiece, SPiece, ZPiece]
+    choices = [IPiece, JPiece, LPiece, OPiece, SPiece, ZPiece, TPiece]
 
     def __init__(self):
         self.R_wins_LR_tie = True
