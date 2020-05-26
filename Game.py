@@ -17,6 +17,10 @@ class Game:
     choices = [IPiece, JPiece, LPiece, OPiece]
 
     def __init__(self):
+        self.R_wins_LR_tie = True
+        self.R_keydown = False
+        self.L_keydown = False
+        self.LR_counter = 0
         self.col_count = 10
         self.row_count = 24
         self._board = Board(self.col_count, self.row_count)
@@ -32,6 +36,13 @@ class Game:
         self._tick_count += 1
         if self._tick_count % 10 == 0:
             self.move_piece((1, 0), down_tick=True)
+        if self.R_keydown or self.L_keydown:
+            self.LR_counter += 1
+            if self.LR_counter % 6 == 0:
+                if self.R_keydown and self.L_keydown and self.R_wins_LR_tie:
+                    self.move_piece((0, 1))
+                else:
+                    self.move_piece((0, -1 if self.L_keydown else 1))
 
     def set_new_piece(self):
         self.active_piece = random.choice(Game.choices)()
@@ -47,11 +58,28 @@ class Game:
                 if not self.check_piece_legal():
                     self.active_piece.rotate_right()
             elif event.key == pygame.K_LEFT:
+                self.R_wins_LR_tie = False
+                self.L_keydown = True
                 self.move_piece((0, -1), down_tick=False)
             elif event.key == pygame.K_RIGHT:
+                self.R_wins_LR_tie = True
+                self.R_keydown = True
                 self.move_piece((0, 1), down_tick=False)
             elif event.key == pygame.K_SPACE:
                 self.hard_drop()
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                self.R_wins_LR_tie = True
+                self.L_keydown = False
+                self.LR_counter = 0
+                if not self.R_keydown:
+                    self.LR_counter = 0
+            elif event.key == pygame.K_RIGHT:
+                self.R_wins_LR_tie = False
+                self.R_keydown = False
+                if not self.L_keydown:
+                    self.LR_counter = 0
 
     def check_piece_legal(self):
         piece_offsets = self.active_piece.get_locations()
@@ -82,5 +110,5 @@ class Game:
         return True
 
     def hard_drop(self):
-        while(self.move_piece((1,0), down_tick=True)):
+        while self.move_piece((1, 0), down_tick=True):
             pass
