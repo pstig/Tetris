@@ -1,9 +1,11 @@
+import pygame
+import random
 from IPiece import IPiece
 from JPiece import JPiece
 from LPiece import LPiece
 from OPiece import OPiece
-import pygame
-import random
+from SPiece import SPiece
+from ZPiece import ZPiece
 
 
 class Board:

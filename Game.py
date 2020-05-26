@@ -5,6 +5,8 @@ from IPiece import IPiece
 from JPiece import JPiece
 from LPiece import LPiece
 from OPiece import OPiece
+from SPiece import SPiece
+from ZPiece import ZPiece
 
 
 class Game:
@@ -14,7 +16,7 @@ class Game:
     # lines complete
     # stats
     # events
-    choices = [IPiece, JPiece, LPiece, OPiece]
+    choices = [IPiece, JPiece, LPiece, OPiece, SPiece, ZPiece]
 
     def __init__(self):
         self.R_wins_LR_tie = True
