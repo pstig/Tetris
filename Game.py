@@ -21,7 +21,7 @@ class Game:
     def game_tick(self):
         self._tick_count += 1
         if (self._tick_count % 10 == 0):
-            self._board.move_piece((1,0))
+            self._board.move_piece((1,0), down_tick=True)
 
     def on_event(self, event):
         if event.type == pygame.KEYDOWN:
